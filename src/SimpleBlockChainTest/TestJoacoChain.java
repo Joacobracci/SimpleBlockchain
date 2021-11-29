@@ -1,6 +1,7 @@
+package SimpleBlockChainTest;
 import java.util.ArrayList;
-
 import com.google.gson.GsonBuilder;
+import SimpleBlockChain.*;
 
 
 public class TestJoacoChain {

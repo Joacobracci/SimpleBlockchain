@@ -1,3 +1,4 @@
+package SimpleBlockChain;
 // Esta clase me tiene que ayudar a convertir facilmente un String a SHA256
 
 import java.security.MessageDigest;

@@ -1,16 +1,26 @@
+import java.util.ArrayList;
+
+import com.google.gson.GsonBuilder;
+
 
 public class TestJoacoChain {
 
-	public static void main(String[] args) {
+		public static ArrayList<Block> blockchain = new ArrayList<Block>();
 		
-		Block bloqueGenesis = new Block ("0" , " Hola soy el primer bloque");
-		System.out.println("Hash para el bloque 1 : " + bloqueGenesis.hash);
 		
-		Block bloqueDos = new Block (bloqueGenesis.hash , " Hola soy el primer bloque");
-		System.out.println("Hash para el bloque 2 : " + bloqueDos.hash);
+		public static void main(String[] args) {
 		
-		Block bloqueTres = new Block (bloqueDos.hash , " Hola soy el primer bloque");
-		System.out.println("Hash para el bloque 3 : " + bloqueTres.hash);
+		// Agregamos nuestros bloques al array de la blockchain
+			
+			blockchain.add(new Block("Hola soy el primer bloque" , "0"));
+			blockchain.add(new Block("Soy el segundo bloque",blockchain.get(blockchain.size()-1).hash)); 
+			// devuelve el hash del elemento en una posicion especifica que equivale a el tama;o de la blockchain -1, 
+			// osea el bloque anterior. (el hash del bloque anterior)
+			blockchain.add(new Block("Soy el tercer bloque",blockchain.get(blockchain.size()-1).hash)); 
+			// mismo devuelve el hash del elemento anterior del array.
+			
+			String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
+			System.out.println(blockchainJson);
 		
 		
 	}

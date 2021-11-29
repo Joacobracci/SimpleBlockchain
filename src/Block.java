@@ -23,7 +23,7 @@ public class Block {
 		
 		// Metodo Constructor
 		
-			public Block(String hashAnterior, String datos) {
+			public Block(String datos, String hashAnterior) {
 				
 		
 				this.hashAnterior = hashAnterior;

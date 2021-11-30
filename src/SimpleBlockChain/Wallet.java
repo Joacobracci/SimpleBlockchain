@@ -28,6 +28,8 @@ public class Wallet {
 			// SecureRandom provee un numero criptograficamente fuerte , instance devuelve
 			// un objeto SecureRandom que implementa el especificado Random Number Generator Algorithm
 			SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+			
+			// algo de una curva eliptica
 			ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
 			// Inicializar keyGenerator y generar un KeyPair
 			

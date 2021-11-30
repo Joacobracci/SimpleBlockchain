@@ -1,7 +1,12 @@
 package SimpleBlockChain;
 // Esta clase me tiene que ayudar a convertir facilmente un String a SHA256
 
+import java.security.Key;
 import java.security.MessageDigest;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
+import java.util.Base64;
 // importamos MessageDigest para tener acceso al algoritmo SHA256
 
 
@@ -54,4 +59,77 @@ public class StringUtil {
 	
 		
 	}
+	
+	
+	// La Firma digital, hace 2 tareas importantes en nuestra blockchain.
+	// primero autorizan solo al priopietario a gastar sus coins y segundo
+	// previenen a otros de manipular con sus transacciones modificadas antes
+	// que un nuevo blocke es minado.
+	
+	
+	/* Por ejemplo elpepe quiere enviar 2 Joacoins a messi, entonces su billetera 
+	 * genera esta transaccion y la envia al minero para incluirla en el proximo bloque, 
+	 * supongamos que un minero intenta cambiar el receptor de 2 coins a el, por suerte elpepe firmo la transaccion
+	 * con su key privada, permitiendo que cualquiera pueda verificar si la transaccion fue alterada usando su 
+	 * public Key
+	 */
+	
+	// La firma va a ser un monton de bytes 
+	
+	// Aplicamos ECDSA y retorna el resultado como bytes  ECDSA. Elliptic Curve Digital Signature Algorithm derivado del DSA
+	// un algoritmo para crear la firma digital. se supone que es seguro.
+	
+	// no comprendo como funciona el algoritmo pero bueno 
+	
+	// ESTA PARTE DEL CODIGO NO LA ENTIENDO Y ES COPIADA 
+	// ESTA PARTE DEL CODIGO NO LA ENTIENDO Y ES COPIADA 
+	// ESTA PARTE DEL CODIGO NO LA ENTIENDO Y ES COPIADA 
+	
+		public static byte[] applyECDSASig(PrivateKey privateKey, String input) {
+		Signature dsa;
+		byte[] output = new byte[0];
+			try {
+				dsa = Signature.getInstance("ECDSA", "BC"); // provee las funcionalidade de la firma digital. autenticacion y seguridad.
+				dsa.initSign(privateKey);
+				byte[] strByte = input.getBytes();
+				dsa.update(strByte);
+				byte[] realSig = dsa.sign();
+				output = realSig;
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			return output;
+		}
+	
+		/* applyECDSASig toma la clave privada del remitente y la entrada de cadena, 
+		 * la firma y devuelve una matriz de bytes. */
+		
+		//Verifies a String signature 
+		public static boolean verifyECDSASig(PublicKey publicKey, String data, byte[] signature) {
+				try {
+					Signature ecdsaVerify = Signature.getInstance("ECDSA", "BC");
+					ecdsaVerify.initVerify(publicKey);
+					ecdsaVerify.update(data.getBytes());
+					return ecdsaVerify.verify(signature);
+				}catch(Exception e) {
+					throw new RuntimeException(e);
+				}
+		}
+	
+		public static String getStringFromKey(Key key) {
+			return Base64.getEncoder().encodeToString(key.getEncoded());
+		}
+		
+		/*  toma la firma, la clave pública y los datos de la cadena
+		 *  y devuelve verdadero o falso si la firma es válida.
+		 *  getStringFromKey devuelve una cadena codificada de cualquier clave.
+		 */
+		
+	
+	// ESTA PARTE DEL CODIGO NO LA ENTIENDO Y ES COPIADA 
+	// ESTA PARTE DEL CODIGO NO LA ENTIENDO Y ES COPIADA 
+	// ESTA PARTE DEL CODIGO NO LA ENTIENDO Y ES COPIADA 
+	
 }
+
+

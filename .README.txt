@@ -1,0 +1,35 @@
+/*       ************************************************** FAQ Y TERMINOS QUE POSIBLEMENTE NO CONOZCA Y VOS TAMPOCO **************************************************************************     */
+
+										-------------------------------------Árbol de Merkle-------------------------------------
+
+
+				Un ejemplo de árbol de Merkle binario. Los hashes 0-0 y 0-1 son los valores de los hash de los bloques de datos 1 y 2 respectivamente, y 0 es el hash de la concatenación
+				de hashes 0-0 y 0-1.
+				Un árbol hash de Merkle (en inglés Merkle Hash Tree) o árbol de merkle o árbol hash es una estructura de datos en árbol, binario o no, en el que cada nodo que no es una
+				hoja está etiquetado con el hash de la concatenación de las etiquetas o valores (para nodos hoja) de sus nodos hijo. Son una generalización de las listas hash y las cadenas
+				hash.
+				
+				Permite que gran número de datos separados puedan ser ligados a un único valor de hash, el hash del nodo raíz del árbol. De esta forma proporciona un método de verificación 
+				segura y eficiente de los contenidos de grandes estructuras de datos. En sus aplicaciones prácticas normalmente el hash del nodo raíz va firmado para asegurar su integridad
+				y que la verificación sea totalmente fiable. 
+				La demostración de que un nodo hoja es parte de un árbol hash dado requiere una cantidad de datos proporcional al logaritmo del número de nodos del árbol.
+
+
+
+
+										-------------------------------------Árbol de Merkle-------------------------------------
+										
+										---------------------------------Digital Signature Algorithm-----------------------------
+										
+										
+
+				DSA (Digital Signature Algorithm, en español Algoritmo de Firma digital) es un estándar del Gobierno Federal de los Estados Unidos de América o FIPS para firmas digitales. 
+				Fue un Algoritmo propuesto por el Instituto Nacional de Normas y Tecnología de los Estados Unidos para su uso en su Estándar de Firma Digital (DSS), 
+				especificado en el FIPS 186. DSA se hizo público el 30 de agosto de 1991.
+				
+				Es un algoritmo puramente asimétrico, junto con RSA. Este algoritmo como su nombre lo indica, sirve para firmar (autenticar), pero no para cifrar información. 
+				Una desventaja de este algoritmo es que requiere mucho más tiempo de cómputo que RSA.
+				
+				
+				
+										---------------------------------Digital Signature Algorithm-----------------------------

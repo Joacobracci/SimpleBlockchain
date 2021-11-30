@@ -26,3 +26,8 @@ public class TransactionOutput {
 	}
 
 }
+
+/*	Los resultados de la transacción mostrarán el monto final enviado a cada parte de la transacción.
+ *  Estos, cuando se mencionan como entradas en nuevas transacciones,
+ * 	actúan como prueba de que tiene monedas para enviar.
+ */

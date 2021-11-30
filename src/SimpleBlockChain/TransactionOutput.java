@@ -12,11 +12,11 @@ public class TransactionOutput {
 	
 	// Metodo constructor
 	
-	public TransactionOutput(String id, PublicKey reciepient, float value, String parentTransactionId) {
-		this.id = id;
+	public TransactionOutput(PublicKey reciepient, float value, String parentTransactionId) {
 		this.reciepient = reciepient;
 		this.value = value;
 		this.parentTransactionId = parentTransactionId;
+		this.id = StringUtil.applicarSha256(StringUtil.getStringFromKey(reciepient)+Float.toString(value)+parentTransactionId);
 	}
 	
 	//Chequear si el coin te pertenece

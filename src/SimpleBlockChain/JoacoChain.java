@@ -1,6 +1,8 @@
 package SimpleBlockChain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.google.gson.GsonBuilder;
 
 
@@ -9,6 +11,8 @@ public class JoacoChain {
 
 		public static ArrayList<Block> blockchain = new ArrayList<Block>();
 		public static int dificultad = 5;
+		public static HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
+		
 		// agrego una dificultad de 5
 		
 		public static void main(String[] args) {

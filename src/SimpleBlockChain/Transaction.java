@@ -1,5 +1,8 @@
 package SimpleBlockChain;
 import java.util.ArrayList;
+
+import SimpleBlockChainTest.TestInputsOutputs;
+
 import java.security.*;
 
 public class Transaction {
@@ -60,4 +63,58 @@ public class Transaction {
 		
 	}
 	
+	// Devuelve true si una nueva transaccion puede ser creada
+	public boolean processTransaction() {
+		
+		if(verifySignature() == false) {
+			System.out.println("#La Firma de la Transaccion no se pudo verificar");
+			return false;
+		}
+		
+		//Recolectar input de transacciones (asegurarnos de que estan sin gastar)
+		for(TransactionInput i : inputs) {
+			i.UTXO = JoacoChain.UTXOs.get(i.transactionOutputId);
+		}
+		
+		//Generar el transaction Output : 
+		float leftOver = getInputsValue() - value; // obtiene el valor de la entrada y lo que sobra
+		transactionId = calculateHash();
+		outputs.add(new TransactionOutput(this.reciepient, value,transactionId)); //Envia el valor al receptor
+		outputs.add(new TransactionOutput(this.sender, leftOver,transactionId)); //Envia lo que sobra ( el cambio) de nuevo al remitente
+		
+		//Agregar outputs a la lista de sin gastar (Unspend)
+		for(TransactionOutput o : outputs) {
+			JoacoChain.UTXOs.put(o.id, o);
+		}
+		
+		//Remover los inputs de la transaccion de la lista UTXO como gastaods
+		for(TransactionInput i : inputs) {
+			if(i.UTXO == null) continue; // si no puede encontrar la transaccion skipeala
+			JoacoChain.UTXOs.remove(i.UTXO.id);
+		}
+		
+		return true;
+		
+	}
+	
+	//Devuelve la suma de inputs (UTXOs) values
+	
+	public float getInputsValue() {
+		float total = 0;
+		for(TransactionInput i : inputs) {
+			if(i.UTXO == null) continue; //si la transaccion no la encuentra que la skipee
+			total += i.UTXO.value;
+		}
+		return total;
+	}
+	
+	//Devuelve la suma de outputs
+	
+	public float getOutputsValue() {
+		float total = 0;
+		for(TransactionOutput o : outputs) {
+			total += o.value;
+		}
+		return total;
+	}
 }

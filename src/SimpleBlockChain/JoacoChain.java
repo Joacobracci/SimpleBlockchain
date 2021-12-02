@@ -19,22 +19,7 @@ public class JoacoChain {
 		
 		// Agregamos nuestros bloques al array de la blockchain
 			
-			blockchain.add(new Block("Hola soy el primer bloque" , "0"));
-			System.out.println("Intentando minar el bloque 1....");
-			blockchain.get(0).minarBloque(dificultad); // Minamos el bloque
 			
-			
-			blockchain.add(new Block("Soy el segundo bloque",blockchain.get(blockchain.size()-1).hash)); 
-			// devuelve el hash del elemento en una posicion especifica que equivale a el tama;o de la blockchain -1, 
-			// osea el bloque anterior. (el hash del bloque anterior)
-			System.out.println("Tratando de minar el bloque 2");
-			blockchain.get(1).minarBloque(dificultad);
-			
-			
-			blockchain.add(new Block("Soy el tercer bloque",blockchain.get(blockchain.size()-1).hash)); 
-			// mismo devuelve el hash del elemento anterior del array.
-			System.out.println("Intentando minar el tercer bloque ...");
-			blockchain.get(2).minarBloque(dificultad);
 			
 			
 			System.out.println("\nBlockchain is Valid:" + isChainValid());

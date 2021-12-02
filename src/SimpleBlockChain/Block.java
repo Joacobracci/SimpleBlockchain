@@ -1,23 +1,25 @@
 package SimpleBlockChain;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Block {
 
 		public String hash;  // Hash del bloque
 		public String hashAnterior; // Hash del bloque anterior
-		private String datos; // datos del mensaje
+		private String merkleRoot; // datos del mensaje
+		public ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 		private long timeStamp; // marca de tiempo en segundos desde 1 1 1970
 		private int nonce;
 		
 		
 		// Metodo Constructor
 		
-		public Block(String datos, String hashAnterior) {
+		public Block(String hashAnterior) {
 						
 				
 			this.hashAnterior = hashAnterior;
-			this.datos = datos;
+		
 			this.timeStamp = new Date().getTime();
 			this.hash = calcularHash(); 
 						
@@ -34,7 +36,7 @@ public class Block {
 						hashAnterior + 
 						Long.toString(timeStamp) + 
 						Integer.toString(nonce) +
-						datos
+						merkleRoot
 					
 					);
 			
@@ -46,7 +48,8 @@ public class Block {
 		// el metodo toma un int llamado dificultad, este es el numero de 0 que tiene que resolver.
 		
 		public void minarBloque(int dificultad) {
-			String target = new String(new char[dificultad]).replace('\0','0');
+			merkleRoot = StringUtil.getMerkleRoot(transactions);
+			String target = StringUtil.getDificultyString(dificultad);
 			// Creamos un string con dificultad * "0" 
 			
 			while(!hash.substring(0, dificultad).equals(target)) {
@@ -58,4 +61,17 @@ public class Block {
 			System.out.println("Bloque Minado!!!!!!  :  " + hash);
 		}
 			
+		public boolean addTransaction(Transaction transaction) {
+			//process transaction and check if valid, unless block is genesis block then ignore.
+			if(transaction == null) return false;		
+			if((hashAnterior != "0")) {
+				if((transaction.processTransaction() != true)) {
+					System.out.println("Transaction fallida xD");
+					return false;
+				}
+			}
+			transactions.add(transaction);
+			System.out.println("Transaction Agregada Exitosamente al Bloque");
+			return true;
+		}
 }
